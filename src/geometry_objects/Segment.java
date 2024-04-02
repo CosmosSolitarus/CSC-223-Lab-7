@@ -71,7 +71,7 @@ public class Segment extends GeometricObject
 	 */
 	public boolean HasSubSegment(Segment candidate)
 	{
-        // TODO
+        return pointLiesOnSegment(candidate._point1) && pointLiesOn(candidate._point2);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class Segment extends GeometricObject
 	@Override
 	public int hashCode()
 	{
-		return _point1.hashCode() +_point2.hashCode();
+		return _point1.hashCode() + _point2.hashCode();
 	}
 
 	/*
@@ -160,7 +160,7 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-        // TODO
+		return isCollinearWith(that) && !pointLiesBetweenEndpoints(that._point1) && !pointLiesBetweenEndpoints(that._point2);
 	}
 	
 	/**

@@ -18,6 +18,7 @@ public class PointNamingFactory
 {
 	// Prefix associated with each generated name so those names are easily distinguishable
 	private static final String _PREFIX = "*_";
+	private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     // Constants reflecting our naming characters for generated names.
 	private static final char START_LETTER = 'A';
@@ -69,7 +70,7 @@ public class PointNamingFactory
 	 */
 	public Point put(Point pt)
 	{
-		if (pt._name == "__UNNAMED") {
+		if (pt._name == Point.ANONYMOUS) {
 			return put(getCurrentName(), pt.getX(), pt.getY());
 		}
 
@@ -88,7 +89,7 @@ public class PointNamingFactory
 	 */
 	public Point put(double x, double y)
 	{
-		return put("__UNNAMED", x, y);
+		return put(getCurrentName(), x, y);
 	}
 
 	/**
@@ -120,8 +121,6 @@ public class PointNamingFactory
 		}
 
 		pt = _database.get(pt);
-		
-		String prevName = pt.getName();
 
 		// valid name overwrites unnamed name
 		if (pt._name.substring(0, 2).equals(_PREFIX)) {
@@ -131,7 +130,7 @@ public class PointNamingFactory
 			_database.put(pt, pt);
 		}
 
-		return new Point(prevName, x, y);
+		return _database.get(pt);
 	}    
 
 	/**
@@ -188,11 +187,10 @@ public class PointNamingFactory
 	 */
 	private void updateName()
 	{
-		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		char canonical = _currentName.charAt(0);
 
-		int indexOfNextChar = alphabet.indexOf(canonical) + 1 % alphabet.length();
-		char c = alphabet.charAt(indexOfNextChar);
+		int indexOfNextChar = ALPHABET.indexOf(canonical) + 1 % ALPHABET.length();
+		char c = ALPHABET.charAt(indexOfNextChar);
 
 		if (canonical == END_LETTER) _numLetters++;
 		int n = _numLetters;
