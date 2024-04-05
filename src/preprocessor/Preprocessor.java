@@ -102,7 +102,7 @@ public class Preprocessor
 	 */
 	protected Set<Segment> computeImplicitBaseSegments(Set<Point> impPoints)
 	{
-		// TODO
+		//TODO
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class Preprocessor
 	 * 
 	 *  1----------2------3----------4--------5
 	 *   
-	 * @param points -- an ordred list of points
+	 * @param points -- an ordered list of points
 	 * @return a set of n-1 segments between all points provided
 	 */
 	protected Set<Segment> makeSegments(SortedSet<Point> points)
@@ -136,7 +136,8 @@ public class Preprocessor
 	{
 		Set<Segment> minimal = new HashSet<Segment>(minimalImpSegments);
 		
-		// TODO
+		
+		// TODO - Given the entire set of segments (givenSegments) ... remove any that are not minimal
 	}
 	
 	/**
@@ -157,6 +158,9 @@ public class Preprocessor
 	private void constructAllNonMinimalSegments(Set<Segment> lastLevelSegs, List<Segment> minimalSegs, Set<Segment> nonMinimalSegs)
 	{
 		// TODO if recursive implementation
+		// non minimal means it DOES contain other implicit or explicit points along the line
+		// *-------*----------*
+		// A       B          C    ... line AC is NON minimal, segments AB and BC are minimal
 	}
 	
 	//
@@ -168,8 +172,12 @@ public class Preprocessor
 	//    * Are each segment on the same (infinite) line?
 	//    * If so, do they share an endpoint?
 	// If both criteria are satisfied we have a new segment.
+	// needs to keep going, if AB is a segment, we fine BC, BC is a new segment,
+	// if we then find CD, BD needs to be a segment. also needs to build on eachother
+	// aka at the end, needs to recognize that AD is also a segment, so is AC, etc
 	private Segment combineToNewSegment(Segment left, Segment right)
 	{
-        // It's a utility method, TODO  if you would use it	
+        // It's a utility method, TODO if you would use it	
+		// AB + BC = AC
 	}
 }
