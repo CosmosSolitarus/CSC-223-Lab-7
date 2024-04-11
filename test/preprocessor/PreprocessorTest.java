@@ -157,4 +157,24 @@ public class PreprocessorTest
 			assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
 		}
 	}
+
+	@Test
+	public void computeImplicitBaseSegmentsTest() {
+
+	}
+
+	@Test
+	public void makeSegmentsTest() {
+
+	}
+
+	@Test
+	public void identifyAllMinimalSegmentsTest() {
+
+	}
+
+	@Test
+	public void constructAllNonMinimalSegmentsTest() {
+
+	}
 }
