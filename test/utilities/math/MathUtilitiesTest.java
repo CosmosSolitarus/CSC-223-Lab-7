@@ -3,40 +3,48 @@ package utilities.math;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-class PointUtilities {
+public class MathUtilitiesTest {
     @Test
-    void doubleLessThanTest() {
-        double dub1 = 0.0;
-        double dub2 = 0.0;
+    public void doubleLessThanTest() {
+        double dub0 = 0.0;
+        double dub1 = 0.01;
+        double dub2 = -0.01;
+        double dub3 = 0.0000000000001;
+        double dub4 = -0.0000000000001;
+        double dub5 = 0.0000011;
+        double dub6 = -0.0000011;
 
-        assertFalse(MathUtilities.doubleLessThan(dub1, dub2));
-        assertFalse(MathUtilities.doubleLessThan(dub2, dub1));
+        assertFalse(MathUtilities.doubleLessThan(dub0, dub0));
 
-        assertFalse(MathUtilities.doubleLessThan(dub1, dub2 - 0.01));
-        assertTrue(MathUtilities.doubleLessThan(dub1, dub2 + 0.01));
+        assertTrue(MathUtilities.doubleLessThan(dub0, dub1));
+        assertFalse(MathUtilities.doubleLessThan(dub0, dub2));
 
-        assertFalse(MathUtilities.doubleLessThan(dub1, dub2 - 0.0000000001));
-        assertFalse(MathUtilities.doubleLessThan(dub1, dub2 + 0.0000000001));
+        assertFalse(MathUtilities.doubleLessThan(dub0, dub3));
+        assertFalse(MathUtilities.doubleLessThan(dub0, dub4));
 
-        assertFalse(MathUtilities.doubleLessThan(dub1, dub2 - 0.000001));
-        assertTrue(MathUtilities.doubleLessThan(dub1, dub2 + 0.000001));
+        assertTrue(MathUtilities.doubleLessThan(dub0, dub5));
+        assertFalse(MathUtilities.doubleLessThan(dub0, dub6));
     }
 
     @Test
-    void doubleGreaterThanTest() {
-        double dub1 = 0.0;
-        double dub2 = 0.0;
+    public void doubleGreaterThanTest() {
+        double dub0 = 0.0;
+        double dub1 = 0.01;
+        double dub2 = -0.01;
+        double dub3 = 0.0000000000001;
+        double dub4 = -0.0000000000001;
+        double dub5 = 0.0000011;
+        double dub6 = -0.0000011;
 
-        assertFalse(MathUtilities.doubleGreaterThan(dub1, dub2));
-        assertFalse(MathUtilities.doubleGreaterThan(dub2, dub1));
+        assertFalse(MathUtilities.doubleGreaterThan(dub0, dub0));
 
-        assertTrue(MathUtilities.doubleGreaterThan(dub1, dub2 - 0.01));
-        assertFalse(MathUtilities.doubleGreaterThan(dub1, dub2 + 0.01));
+        assertFalse(MathUtilities.doubleGreaterThan(dub0, dub1));
+        assertTrue(MathUtilities.doubleGreaterThan(dub0, dub2));
 
-        assertFalse(MathUtilities.doubleGreaterThan(dub1, dub2 - 0.0000000001));
-        assertFalse(MathUtilities.doubleGreaterThan(dub1, dub2 + 0.0000000001));
+        assertFalse(MathUtilities.doubleGreaterThan(dub0, dub3));
+        assertFalse(MathUtilities.doubleGreaterThan(dub0, dub4));
 
-        assertTrue(MathUtilities.doubleGreaterThan(dub1, dub2 - 0.000001));
-        assertFalse(MathUtilities.doubleGreaterThan(dub1, dub2 + 0.000001));
+        assertFalse(MathUtilities.doubleGreaterThan(dub0, dub5));
+        assertTrue(MathUtilities.doubleGreaterThan(dub0, dub6));
     }
 }

@@ -17,11 +17,11 @@ public class MathUtilities
     }
 
     public static boolean doubleLessThan(double a, double b) {
-        return Math.abs(a) < Math.abs(b) - EPSILON;
+        return a < b - EPSILON;
     }
     
     public static boolean doubleGreaterThan(double a, double b) {
-        return Math.abs(a) > Math.abs(b) + EPSILON;
+        return a > b + EPSILON;
     }
     
     /**

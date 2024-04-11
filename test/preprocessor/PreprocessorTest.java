@@ -15,10 +15,10 @@ import input.InputFacade;
 import input.components.FigureNode;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
-class PreprocessorTest
+public class PreprocessorTest
 {
 	@Test
-	void test_implicit_crossings()
+	public void test_implicit_crossings()
 	{
 		// TODO: Update this file path for your particular project
 		FigureNode fig = InputFacade.extractFigure("fully_connected_irregular_polygon.json");
