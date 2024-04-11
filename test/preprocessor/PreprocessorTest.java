@@ -22,7 +22,7 @@ class PreprocessorTest
 	@Test
 	void test_implicit_crossings()
 	{
-		                                 // TODO: Update this file path for your particular project
+		// TODO: Update this file path for your particular project
 		FigureNode fig = InputFacade.extractFigure("fully_connected_irregular_polygon.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);

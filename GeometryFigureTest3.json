@@ -1,0 +1,37 @@
+//
+//                  A
+//           B             H         
+//
+//       C          I          G
+//
+//           D             F
+//                  E
+//
+// All points connect to center and points immediately to left and right.
+//
+{ "Figure" :
+    { "Description" : "Fully Interconnected 8 Point Circle with Middle Point (Half Implicit)",
+    "Points" : [
+            { "name" : "A", "x" : 1, "y" : 0 },
+            { "name" : "B", "x" : 0.707106781187, "y" : 0.707106781187 },
+            { "name" : "C", "x" : 0, "y" : 1 },
+            { "name" : "D", "x" : -0.707106781187, "y" : 0.707106781187 },
+            { "name" : "E", "x" : -1, "y" : 0 },
+            { "name" : "F", "x" : -0.707106781187, "y" : -0.707106781187 },
+            { "name" : "G", "x" : -1, "y" : -1 },
+            { "name" : "H", "x" : 0.707106781187, "y" : -0.707106781187 },
+            { "name" : "I", "x" : 0, "y" : 0 }
+        ],
+        "Segments" : [
+            {"A" : ["B"] },
+            {"B" : ["C"] },
+            {"C" : ["D"] },
+            {"D" : ["E"] },
+            {"E" : ["F"] },
+            {"F" : ["G"] },
+            {"G" : ["H"] },
+            {"H" : ["A"] },
+            {"I" : ["A", "B", "C", "D", "E", "F", "G", "H"] }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+//	
+//	   C
+//	             B
+//	
+//	       A     E
+//	
+//	F
+//	     D
+//
+// A <-_> B
+// C <--> D
+// E <--> F
+//	
+{ "Figure" :
+    { "Description" : "Non-Connected Segments",
+    "Points" : [
+            { "name" : "A", "x" : 0, "y" : 0 },
+            { "name" : "B", "x" : 2, "y" : 2 },
+            { "name" : "C", "x" : -2, "y" : 3 },
+            { "name" : "D", "x" : -1, "y" : -4 },
+            { "name" : "E", "x" : 3, "y" : 0 },
+            { "name" : "F", "x" : -3, "y" : -3 }
+        ],
+        "Segments" : [
+            {"A" : ["B"] },
+            {"C" : ["D"] },
+            {"E" : ["F"] }
+        ]
+    }
+}

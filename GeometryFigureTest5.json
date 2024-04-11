@@ -1,0 +1,25 @@
+//	
+//	      A
+//	    /   \
+//	  C       B
+//	 / \     / \
+//	G   F   D   E
+//
+{ "Figure" :
+    { "Description" : "Binary Tree Structure",
+    "Points" : [
+            { "name" : "A", "x" : 0, "y" : 2 },
+            { "name" : "B", "x" : 2, "y" : 1 },
+            { "name" : "C", "x" : -2, "y" : 1 },
+            { "name" : "D", "x" : 1, "y" : 0 },
+            { "name" : "E", "x" : 3, "y" : 0 },
+            { "name" : "F", "x" : -1, "y" : 0 },
+            { "name" : "G", "x" : -3, "y" : 0 }
+        ],
+        "Segments" : [
+            {"A" : ["B", "C"] },
+            {"B" : ["D", "E"] },
+            {"C" : ["F", "G"] }
+        ]
+    }
+}

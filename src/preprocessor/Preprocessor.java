@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
@@ -102,7 +103,26 @@ public class Preprocessor
 	 */
 	protected Set<Segment> computeImplicitBaseSegments(Set<Point> impPoints)
 	{
-		//TODO
+		Set<Segment> segments = _segmentDatabase.keySet();
+		Set<Segment> impSegments = new HashSet<Segment>();
+		SortedSet<Point> points = new TreeSet<Point>();
+
+		for (Segment segment : segments) {
+			for (Point point : impPoints) {
+				if (segment.pointLiesOn(point)) {
+					points.add(point);
+				}
+			}
+
+			points.add(segment.getPoint1());
+			points.add(segment.getPoint2());
+
+			impSegments.addAll(makeSegments(points));
+
+			points.clear();
+		}
+
+		return impSegments;
 	}
 	
 	/**
@@ -119,7 +139,20 @@ public class Preprocessor
 	 */
 	protected Set<Segment> makeSegments(SortedSet<Point> points)
 	{
-         // It's a utility method, TODO  if you would use it		
+        Set<Segment> segments = new HashSet<>();
+		Point pt1;
+		Point pt2;
+		
+		for (int i = 0; i < points.size() - 1; i++) {
+			pt1 = points.first();
+			points.removeFirst();
+
+			pt2 = points.first();
+
+			segments.add(new Segment(pt1, pt2));
+		}
+		
+		return segments;
 	}
 	
 	/**
@@ -136,7 +169,7 @@ public class Preprocessor
 	{
 		Set<Segment> minimal = new HashSet<Segment>(minimalImpSegments);
 		
-		
+		return null;
 		// TODO - Given the entire set of segments (givenSegments) ... remove any that are not minimal
 	}
 	
@@ -155,12 +188,13 @@ public class Preprocessor
 		return nonMinimalSegs;
 	}
 
+	// non minimal means it DOES contain other implicit or explicit points along the line
+	// *-------*----------*
+	// A       B          C    ... line AC is NON minimal, segments AB and BC are minimal
 	private void constructAllNonMinimalSegments(Set<Segment> lastLevelSegs, List<Segment> minimalSegs, Set<Segment> nonMinimalSegs)
 	{
 		// TODO if recursive implementation
-		// non minimal means it DOES contain other implicit or explicit points along the line
-		// *-------*----------*
-		// A       B          C    ... line AC is NON minimal, segments AB and BC are minimal
+
 	}
 	
 	//
@@ -172,12 +206,36 @@ public class Preprocessor
 	//    * Are each segment on the same (infinite) line?
 	//    * If so, do they share an endpoint?
 	// If both criteria are satisfied we have a new segment.
-	// needs to keep going, if AB is a segment, we fine BC, BC is a new segment,
-	// if we then find CD, BD needs to be a segment. also needs to build on eachother
-	// aka at the end, needs to recognize that AD is also a segment, so is AC, etc
 	private Segment combineToNewSegment(Segment left, Segment right)
-	{
-        // It's a utility method, TODO if you would use it	
-		// AB + BC = AC
+	{	
+		// 1 - check collinearity
+		if (!left.isCollinearWith(right)) {
+			return null;
+		}
+
+		// 2 - check for shared point
+		Point shared = left.sharedVertex(right);
+
+		if (shared == null) {
+			return null;
+		}
+
+		// 3 - find points of new segment and return
+		Point pt1 = null;
+		Point pt2 = null;
+
+		if (!left.getPoint1().equals(shared)) {
+			pt1 = left.getPoint1();
+		} else if (!left.getPoint2().equals(shared))  {
+			pt1 = left.getPoint2();
+		}
+		
+		if (!right.getPoint1().equals(shared)) {
+			pt2 = right.getPoint1();
+		} else if (!right.getPoint2().equals(shared)) {
+			pt2 = right.getPoint2();
+		}
+
+		return new Segment(pt1, pt2);
 	}
 }
