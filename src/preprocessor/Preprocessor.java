@@ -163,14 +163,26 @@ public class Preprocessor
 	 * @param minimalImpSegments -- minimal implicit segments computed from the implicit points
 	 * @return -- a 
 	 */
+
+	// Given the entire set of segments (givenSegments) ... remove any that are not minimal
 	protected Set<Segment> identifyAllMinimalSegments(Set<Point> impPoints,
 			Set<Segment> givenSegments,
 			Set<Segment> minimalImpSegments)
 	{
 		Set<Segment> minimal = new HashSet<Segment>(minimalImpSegments);
 		
-		return null;
-		// TODO - Given the entire set of segments (givenSegments) ... remove any that are not minimal
+		for (Segment segment : givenSegments) {
+			minimal.add(segment);
+
+			for (Point point : impPoints) {
+				if (segment.pointLiesBetweenEndpoints(point)) {
+					minimal.remove(segment);
+					break;
+				}
+			}
+		}
+
+		return minimal;
 	}
 	
 	/**
