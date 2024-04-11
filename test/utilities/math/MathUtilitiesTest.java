@@ -3,8 +3,6 @@ package utilities.math;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import utilities.math.MathUtilities;
-
 class PointUtilities {
     @Test
     void doubleLessThanTest() {
