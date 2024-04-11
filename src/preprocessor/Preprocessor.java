@@ -103,7 +103,9 @@ public class Preprocessor
 	 */
 	protected Set<Segment> computeImplicitBaseSegments(Set<Point> impPoints)
 	{
-		Set<Segment> segments = _segmentDatabase.keySet();
+		// Set<Segment> segments = _segmentDatabase.keySet();
+		Set<Segment> segments = _givenSegments;
+
 		Set<Segment> impSegments = new HashSet<Segment>();
 		SortedSet<Point> points = new TreeSet<Point>();
 
@@ -113,13 +115,14 @@ public class Preprocessor
 					points.add(point);
 				}
 			}
+			if (points.size() != 0) {
+				points.add(segment.getPoint1());
+				points.add(segment.getPoint2());
 
-			points.add(segment.getPoint1());
-			points.add(segment.getPoint2());
+				impSegments.addAll(makeSegments(points));
 
-			impSegments.addAll(makeSegments(points));
-
-			points.clear();
+				points.clear();
+			}
 		}
 
 		return impSegments;
@@ -140,14 +143,12 @@ public class Preprocessor
 	protected Set<Segment> makeSegments(SortedSet<Point> points)
 	{
         Set<Segment> segments = new HashSet<>();
-		Point pt1;
-		Point pt2;
-		
-		for (int i = 0; i < points.size() - 1; i++) {
-			pt1 = points.first();
+
+		while (points.size() > 1) {
+			Point pt1 = points.first();
 			points.removeFirst();
 
-			pt2 = points.first();
+			Point pt2 = points.first();
 
 			segments.add(new Segment(pt1, pt2));
 		}
@@ -210,8 +211,12 @@ public class Preprocessor
 		for (Segment segment : lastLevelSegs) {
 			for (Segment minSeg : minimalSegs) {
 				if (!segment.HasSubSegment(minSeg)) {
-					nonMinimalSegs.add(combineToNewSegment(minSeg, segment));
-					changed = true;
+					Segment possibleSegment = combineToNewSegment(minSeg, segment);
+
+					if (possibleSegment != null) {
+						nonMinimalSegs.add(possibleSegment);
+						changed = true;
+					}
 				}
 			}
 		}

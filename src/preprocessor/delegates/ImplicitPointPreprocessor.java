@@ -22,13 +22,15 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
-		int size = givenPoints.size();
-		Point pt;
+		int size = givenSegments.size();
 
         for (int i = 0; i < size; i++) {
-			for (int j = i; j < size; j++) {
-				pt = givenSegments.get(i).segmentIntersection(givenSegments.get(j));
+			for (int j = i + 1; j < size; j++) {
+				Segment a = givenSegments.get(i);
+				Segment b = givenSegments.get(j);
 
+				Point pt = a.segmentIntersection(b);
+				
 				if (pt != null) {
 					implicitPoints.add(pt);
 					givenPoints.put(pt.getName(), pt.getX(), pt.getY());

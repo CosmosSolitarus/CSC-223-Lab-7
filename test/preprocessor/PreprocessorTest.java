@@ -35,15 +35,13 @@ public class PreprocessorTest
 		Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
 		assertEquals(5, iPoints.size());
 
-		System.out.println(iPoints);
-
 		//
 		//
 		//		               D(3, 7)
 		//
 		//
-		//   E(-2,4)       D*      E*
-		//		         C*          A*       C(6, 3)
+		//   E(-2,4)       D*      E*      C(6, 3)
+		//		         C*          A*       
 		//                      B*
 		//		       A(2,0)        B(4, 0)
 		//
@@ -65,6 +63,7 @@ public class PreprocessorTest
 		// There are 15 implied segments inside the pentagon; see figure above
 		//
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(iPoints);
+
 		assertEquals(15, iSegments.size());
 
 		List<Segment> expectedISegments = new ArrayList<Segment>();

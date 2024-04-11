@@ -10,6 +10,7 @@ import java.util.Set;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import geometry_objects.Segment;
+import input.builder.GeometryBuilder;
 import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.segment.SegmentNode;
@@ -36,9 +37,11 @@ public class InputFacade
 	 */
 	public static FigureNode extractFigure(String filepath)
 	{
-        JSONParser parser = new JSONParser();
+        JSONParser parser = new JSONParser(new GeometryBuilder());
 
-		return (FigureNode) parser.parse(filepath);
+		String figureStr = utilities.io.FileUtilities.readFileFilterComments(filepath);
+
+		return (FigureNode) parser.parse(figureStr);
 	}
 	
 	/**
@@ -84,7 +87,7 @@ public class InputFacade
 
 		for (SegmentNode sn : sns) {
 			PointNode pn0 = sn.getPoint1();
-			PointNode pn1 = sn.getPoint1();
+			PointNode pn1 = sn.getPoint2();
 
 			Point p0 = new Point(pn0.getName(), pn0.getX(), pn0.getY());
 			Point p1 = new Point(pn1.getName(), pn1.getX(), pn1.getY());
