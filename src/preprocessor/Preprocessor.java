@@ -192,9 +192,23 @@ public class Preprocessor
 	// *-------*----------*
 	// A       B          C    ... line AC is NON minimal, segments AB and BC are minimal
 	private void constructAllNonMinimalSegments(Set<Segment> lastLevelSegs, List<Segment> minimalSegs, Set<Segment> nonMinimalSegs)
-	{
-		// TODO if recursive implementation
+	{	
+		boolean changed = false;
 
+		for (Segment segment : lastLevelSegs) {
+			for (Segment minSeg : minimalSegs) {
+				if (!segment.HasSubSegment(minSeg)) {
+					nonMinimalSegs.add(combineToNewSegment(minSeg, segment));
+					changed = true;
+				}
+			}
+		}
+
+		if (!changed) {
+			return;
+		}
+
+		constructAllNonMinimalSegments(nonMinimalSegs, minimalSegs, nonMinimalSegs);
 	}
 	
 	//

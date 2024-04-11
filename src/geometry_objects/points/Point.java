@@ -31,7 +31,7 @@ public class Point implements Comparable<Point>
 
 	// BasicPoint objects are named points (from input)
 	// ImpliedPoint objects are unnamed points (from input)
-	public boolean isGenerated() { return false; }
+	public boolean isGenerated() { return _name.substring(0, 2).equals("*_"); }
 
 	/**
 	 * Create a new Point with the specified coordinates.

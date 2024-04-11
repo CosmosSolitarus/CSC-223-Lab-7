@@ -71,7 +71,7 @@ public class Segment extends GeometricObject
 	 */
 	public boolean HasSubSegment(Segment candidate)
 	{
-        return pointLiesOnSegment(candidate._point1) && pointLiesOn(candidate._point2);
+        return pointLiesOn(candidate._point1) && pointLiesOn(candidate._point2);
 	}
 
 	/**

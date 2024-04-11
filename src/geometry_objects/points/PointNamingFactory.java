@@ -189,7 +189,7 @@ public class PointNamingFactory
 	{
 		char canonical = _currentName.charAt(0);
 
-		int indexOfNextChar = ALPHABET.indexOf(canonical) + 1 % ALPHABET.length();
+		int indexOfNextChar = (ALPHABET.indexOf(canonical) + 1) % ALPHABET.length();
 		char c = ALPHABET.charAt(indexOfNextChar);
 
 		if (canonical == END_LETTER) _numLetters++;
